@@ -11,7 +11,7 @@ module.exports.Bills = sequelize.define(
 			allowNull: false,
 			autoIncrement: true,
 		},
-		ipd_no: {
+		ipd: {
 			type: DataTypes.STRING
 		},
 		bill_no: {
@@ -23,7 +23,7 @@ module.exports.Bills = sequelize.define(
 		patient_name: {
 			type: DataTypes.STRING
 		},
-        contact_no: {
+        contact: {
             type: DataTypes.STRING,
 	        },
         address: {
@@ -35,7 +35,10 @@ module.exports.Bills = sequelize.define(
 		sex: {
 			type: DataTypes.STRING,
         },
-		doctor: {
+		doctor1: {
+			type: DataTypes.STRING,
+		},
+		doctor2: {
 			type: DataTypes.STRING,
 		},
 		discharge_type: {
@@ -52,6 +55,12 @@ module.exports.Bills = sequelize.define(
 		},
 		payment_method: {
 			type: DataTypes.STRING,
+		},
+		link: {
+			type: DataTypes.STRING,
+		},
+		total_amount: {
+			type: DataTypes.BIGINT,
 		}
 	},
 	{

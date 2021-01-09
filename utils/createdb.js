@@ -6,9 +6,9 @@ async function public_force() {
 	try {
 		//Access Management
         await db.models.bills.create({});
-        await db.models.particulars.create({ bill_id : 1})
-        await db.models.particulars.create({ bill_id : 1})
-        await db.models.particulars.create({ bill_id : 1})
+        await db.models.particulars.create({ billId : 1})
+        await db.models.particulars.create({ billId : 1})
+        await db.models.particulars.create({ billId : 1})
 	} catch (e) {
 		console.log(e);
 	}

@@ -11,11 +11,11 @@ module.exports.Particulars = sequelize.define(
 			allowNull: false,
 			autoIncrement: true,
         },
-        sr : {
+        sn : {
             type: DataTypes.BIGINT,
         },
-        details : {
-            type: DataTypes.BIGINT,
+        detail : {
+            type: DataTypes.STRING,
         },
         rate : {
             type: DataTypes.BIGINT,
@@ -23,7 +23,7 @@ module.exports.Particulars = sequelize.define(
         qty : {
             type: DataTypes.BIGINT,
         },
-        net_amount : {
+        net : {
             type: DataTypes.BIGINT,
         }
 	},

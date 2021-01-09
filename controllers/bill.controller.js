@@ -29,7 +29,7 @@ module.exports.getBills = async (req, res) => {
 module.exports.getBill = async (req, res) => {
     try {
         const bill = await db.models.bills.findOne({
-            where : { id : req.params.id },
+            where : { id : req.query.id },
             include : [
                 {
                     model : db.models.particulars
@@ -39,7 +39,7 @@ module.exports.getBill = async (req, res) => {
         if (bill) {
             res.status(200).json({
                 success: true,
-                bills
+                bill
             })
         } else {
             res.status(404).send({
@@ -61,24 +61,27 @@ module.exports.getBill = async (req, res) => {
 module.exports.addBill = async (req, res) => {
     try {
         const new_bill = {
-            ipd_no: req.body.ipd_no,
+            ipd: req.body.ipd,
             bill_no: req.body.bill_no,
             bill_date: req.body.bill_date,
             patient_name: req.body.patient_name,
-            contact_no: req.body.contact_no,
+            contact: req.body.contact,
             address: req.body.address,
             age: req.body.age,
             sex: req.body.sex,
-            doctor: req.body.doctor,
+            doctor1: req.body.doctor1,
+            doctor2: req.body.doctor2,
             discharge_type: req.body.discharge_type,
             dept: req.body.dept,
             admission_date: req.body.admission_date,
             discharge_date: req.body.discharge_date,
             payment_method: req.body.payment_method,
+            total_amount: req.body.total_amount,
         }
         const bill = await db.models.bills.create(new_bill)
         res.status(200).json({
             success: true,
+            bill
         })
         
     } catch (e) {
@@ -94,11 +97,12 @@ module.exports.addBill = async (req, res) => {
 module.exports.addP = async (req, res) => {
     try {
         const new_p = {
-            sr : req.body.sr,
-            details : req.body.details,
+            sn : req.body.sn,
+            detail : req.body.detail,
             rate : req.body.rate,
             qty : req.body.qty,
-            net_amount : req.body.net_amount,
+            net : req.body.net,
+            billId: req.body.bill_id
         }
         const p = await db.models.particulars.create(new_p)
         res.status(200).json({
