@@ -26,6 +26,7 @@ services:
             context: ./client
             dockerfile: Dockerfile
         image: bill_generator_frontend
+        container_name: frontend_bill_gen
         ports: 
             - "3000:3000"
         volumes:

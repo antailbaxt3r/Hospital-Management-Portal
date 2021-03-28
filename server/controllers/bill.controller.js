@@ -119,9 +119,34 @@ module.exports.addP = async (req, res) => {
 	}
 }
 
-module.exports.createBillPdf = async (req, res) => {
-    try {
+const addPInternal = async (p) => {
+    const new_p = {
+        sn : p.sn,
+        detail : p.detail,
+        rate : p.rate,
+        qty : p.qty,
+        net : p.net,
+        billId: p.bill_id
+    }
+    await db.models.particulars.create(new_p)
+        .then(p => {
+            console.log("Particular Added", p)
+        })
+        .catch(e => {
+            console.error("could not add", p)
+            throw new Error(e)
+        })
+    
+}
 
+module.exports.addMultipleP = async (req, res) => {
+    try {
+        const p_list = req.body.particulars
+        p_list.forEach(p => addPInternal(p))
+        res.status(200).json({
+            success: true,
+        })
+        
     } catch (e) {
 		console.log(e);
 		res.status(500).send({

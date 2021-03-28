@@ -6,5 +6,6 @@ router.get('/get/all', bills.getBills)
 router.get('/get', bills.getBill)
 router.post('/addbill', bills.addBill)
 router.post('/addp', bills.addP)
+router.post('/addmp', bills.addMultipleP)
 
 module.exports = router;

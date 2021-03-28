@@ -15,7 +15,6 @@ app.get("/", (req, res) => {
   });
 });
 app.use('/api/v1', router);
-
 db.connectDb();
 
 module.exports = app
