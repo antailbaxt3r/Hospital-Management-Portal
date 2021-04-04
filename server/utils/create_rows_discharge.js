@@ -1,9 +1,42 @@
 const { Document, Media, Run, TextRun, WidthType, BorderStyle, Packer, Paragraph, Table, TableCell, TableRow, VerticalAlign, TextDirection, AlignmentType } = require("docx");
 
 function generateRows (particulars) {
+
+    const treatmentLines = [];
+    particulars.treatment_given.split('\n').forEach(line => {
+        treatmentLines.push(
+            new Paragraph({
+                children: [
+                    new TextRun({
+                        text: line,
+                        size: 28,
+                        font: "Calibri (Body)",
+                    })
+                ],
+                alignment: AlignmentType.LEFT,
+            })
+        )
+    })
+
     const adviceOnDischargeLines = [];
     particulars.advice_on_discharge.split('\n').forEach(line => {
         adviceOnDischargeLines.push(
+            new Paragraph({
+                children: [
+                    new TextRun({
+                        text: line,
+                        size: 28,
+                        font: "Calibri (Body)",
+                    })
+                ],
+                alignment: AlignmentType.LEFT,
+            })
+        )
+    })
+
+    const adviceforBabyLines = [];
+    particulars.advice_for_baby.split('\n').forEach(line => {
+        adviceforBabyLines.push(
             new Paragraph({
                 children: [
                     new TextRun({
@@ -556,23 +589,7 @@ function generateRows (particulars) {
                     },
                     margins: 20,
                     width: { size: 70, type: WidthType.PERCENTAGE },
-                    children: [
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: particulars.treatment_given.toString() + "\n",
-                                    size: 28,
-                                    font: "Calibri (Body)",
-                                }),
-                                new TextRun({
-                                    text: "",
-                                    size: 28,
-                                    font: "Calibri (Body)",
-                                }),
-                            ],
-                            alignment: AlignmentType.LEFT,
-                        }),
-                    ],
+                    children: treatmentLines,
                     verticalAlign: VerticalAlign.TOP,
                 })
             ],
@@ -1039,23 +1056,7 @@ function generateRows (particulars) {
                     },
                     margins: 20,
                     width: { size: 70, type: WidthType.PERCENTAGE },
-                    children: [
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: particulars.advice_for_baby.toString() + "\n",
-                                    size: 28,
-                                    font: "Calibri (Body)",
-                                }),
-                                new TextRun({
-                                    text: "",
-                                    size: 28,
-                                    font: "Calibri (Body)",
-                                }),
-                            ],
-                            alignment: AlignmentType.LEFT,
-                        }),
-                    ],
+                    children: adviceforBabyLines,
                     verticalAlign: VerticalAlign.TOP,
                 })
             ],

@@ -3,6 +3,7 @@ const fs = require("fs");
 const path = require("path");
 
 async function generateDischarge (data) {
+    console.log(data)
     const tableRowsList = require("./create_rows_discharge.js")(data.rows);
     const doc = new Document();
     const header = Media.addImage(doc, fs.readFileSync(path.join(__dirname, "../static/header.png").toString()), 725, 224);
@@ -509,7 +510,7 @@ async function generateDischarge (data) {
                             new Paragraph({
                                 children: [
                                     new TextRun({
-                                        text: data.admission_date.toString() + " (" + data.admisson_time.toString() + ")",
+                                        text: data.admission_date.toString() + " (" + data.admission_time.toString() + ")",
                                         size: 22,
                                         font: "Arial",
                                     }),
@@ -727,13 +728,13 @@ async function generateDischarge (data) {
     });
 
     const filepath = 'database/discharges/'
-    const filename = data.patient_name.split(" ").join("") + data.discharge_date.split('/').join('') + "_discharge" + ".docx"
+    const filename = data.patient_name.toString().split(" ").join("").toString().trim() + data.discharge_date.toString().split('/').join('').toString().trim() + "_discharge" + ".docx"
 
     Packer.toBuffer(doc).then((buffer) => {
         fs.writeFileSync(path.join(filepath, filename), buffer);
     });
 
-    return path.join(filepath, filename)
+    return filename
 }
 
 module.exports = generateDischarge
